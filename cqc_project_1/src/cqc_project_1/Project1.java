@@ -16,9 +16,6 @@ public class Project1
     static String comparison, sequence;
     static int rem[][];
     
-    /* parsed string userInput to int */
-    static int parsedInput;
-    
     /**
      * @param args
      * @throws IOException
@@ -27,7 +24,7 @@ public class Project1
     {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = new String(bufferedReader.readLine());
-        parsedInput = Integer.parseInt(userInput);
+        int parsedUserInput = Integer.parseInt(userInput);
         
         for (int i = 0; i < parsedInput; i++)
         {
