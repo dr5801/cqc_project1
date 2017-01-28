@@ -21,7 +21,6 @@ public class Project1
     
     /* parsed string userInput to int */
     static int parsedInput;
-    static BufferedReader ir;
     
     /**
      * @param args
@@ -29,14 +28,14 @@ public class Project1
      */
     public static void main(String[] args) throws IOException
     {
-        ir = new BufferedReader(new InputStreamReader(System.in));
-        userInput = new String(ir.readLine());
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        userInput = new String(bufferedReader.readLine());
         parsedInput = Integer.parseInt(userInput);
         
         for (int i = 0; i < parsedInput; i++)
         {
-        	sequence = new String(ir.readLine());
-        	comparison = new String(ir.readLine());
+        	sequence = new String(bufferedReader.readLine());
+        	comparison = new String(bufferedReader.readLine());
         	System.out.println(answer(comparison, sequence));
         }
     }
