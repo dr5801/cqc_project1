@@ -72,28 +72,28 @@ public class Project1
     }
 
     /**
-     * @param xE
-     * @param zE
+     * @param comparisonSize
+     * @param sequenceSize
      * @return
      */
-    private static int cMeat(int xE, int zE)
+    private static int cMeat(int comparisonSize, int sequenceSize)
     {
-        if (xE == -1)
+        if (comparisonSize == -1)
         return 1;
-        if (xE > zE)
+        if (comparisonSize > sequenceSize)
         return 0;
-        if (xE == zE)
+        if (comparisonSize == sequenceSize)
         {
-        if (sameish(xE))
+        if (sameish(comparisonSize))
         return 1;
         return 0;
         }
-        if (comparison.charAt(xE) == sequence.charAt(zE))
+        if (comparison.charAt(comparisonSize) == sequence.charAt(sequenceSize))
         {
-        return (cShell(xE - 1, zE - 1))
-          + cShell(xE, zE - 1);
+        return (cShell(comparisonSize - 1, sequenceSize - 1))
+          + cShell(comparisonSize, sequenceSize - 1);
         }
-        return (cShell(xE, zE - 1));
+        return (cShell(comparisonSize, sequenceSize - 1));
     }
 
     private static boolean sameish(int end)
