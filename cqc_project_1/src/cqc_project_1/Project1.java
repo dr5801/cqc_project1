@@ -26,7 +26,7 @@ public class Project1
         String userInput = new String(bufferedReader.readLine());
         int parsedUserInput = Integer.parseInt(userInput);
         
-        for (int i = 0; i < parsedInput; i++)
+        for (int i = 0; i < parsedUserInput; i++)
         {
         	sequence = new String(bufferedReader.readLine());
         	comparison = new String(bufferedReader.readLine());
