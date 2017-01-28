@@ -112,36 +112,37 @@ public class Project1
      */
     private static int searchForOccurrences(int[][] savedOccurrences, String comparisonWord, String sequenceText, int comparisonWordIndex, int sequenceTextIndex)
     {
-        if (comparisonWordIndex == -1)
-        {
-        	return 1;
-        }
         if (comparisonWordIndex > sequenceTextIndex)
         {
         	return 0;
         }
-        if (comparisonWordIndex == sequenceTextIndex)
+        else if (comparisonWordIndex == sequenceTextIndex)
         {
-        	if (sameish(comparisonWordIndex))
-        	{
-        		return 1;
-        	}
-        	return 0;
+        	return checkIfCharactersMatch(comparisonWord, sequenceText, comparisonWordIndex);
         }
-        if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
+        else if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
         {
-        return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordIndex - 1), (sequenceTextIndex - 1))
-          + saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
+        	return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordIndex - 1), (sequenceTextIndex - 1))
+        			+ saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
         }
+        
         return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
     }
 
-    private static boolean sameish(int end)
+    /**
+     * Checks if the character in comparisonWord is the same as the character in sequenceText at matching indexes
+     * @param comparisonWord
+     * @param sequenceText
+     * @param matchingIndex
+     * @return 1 if they match; 0 otherwise
+     */
+    private static int checkIfCharactersMatch(String comparisonWord, String sequenceText, int matchingIndex)
     {
-        for (int i = 0; i <= end; i++)
-        if (comparisonWord.charAt(i) != sequenceText.charAt(i))
-        return false;
-        return true;
+    	if(comparisonWord.charAt(matchingIndex) == sequenceText.charAt(matchingIndex))
+    	{
+    		return 1;
+    	}
+    	return 0;
     }
 
 }
