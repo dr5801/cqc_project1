@@ -30,29 +30,8 @@ public class Project1
         {
         	sequenceText = new String(bufferedReader.readLine());
         	comparisonWord = new String(bufferedReader.readLine());
-        	System.out.println(answer(comparisonWord, sequenceText));
+        	System.out.println(getNumberOfOccurrences(comparisonWord, sequenceText));
         }
-    }
-
-
-    public static int answer(String comparison, String sequence)
-    {
-        int sequenceSize = sequence.length() - 1;
-        int comparisonSize = comparison.length() - 1;
-        rem = new int[comparisonSize+1][sequenceSize+1];
-        
-        /**
-         * pupulates 2D array, rem, with -1
-         */
-        for(int row=0; row<comparisonSize+1; row++)
-        {
-        	for(int column=0; column<sequenceSize+1; column++)
-        	{
-        		rem[row][column] = -1;
-        	}
-        	
-        }        
-        return getNumberOfOccurences(comparisonSize, sequenceSize);
     }
 
     /**
@@ -61,38 +40,100 @@ public class Project1
      * @param sequenceSize
      * @return
      */
-    private static int getNumberOfOccurences(int comparisonSize, int sequenceSize)
+    private static int getNumberOfOccurrences(String comparisonWord, String sequenceText)
     {
-        if (comparisonSize == -1)
-        return 1;
-        if (rem[comparisonSize][sequenceSize] == -1)
-        rem[comparisonSize][sequenceSize] = cMeat(comparisonSize, sequenceSize);
-        return rem[comparisonSize][sequenceSize];
+    	int comparisonWordSize = comparisonWord.length();
+    	int sequenceTextSize = sequenceText.length();
+    	
+    	int[][] savedOccurrences = getInitializedArray(comparisonWordSize, sequenceTextSize);
+    	
+    	return saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordSize-1), (sequenceTextSize-1));
     }
 
     /**
-     * @param comparisonSize
+     * Returns an initialized array filled with -1s
+     * 
+     * Sets the amount of rows by the size of the comparisonWord and
+     * sets the amount of columns by the size of the seqenceText
+     * 
+     * @param comparisonWordSize
+     * @param sequenceTextSize
+     * @return initializedArray
+     */
+    public static int[][] getInitializedArray(int comparisonWordSize, int sequenceTextSize)
+    {
+        
+        int[][] initializedArray = new int[comparisonWordSize][sequenceTextSize];
+        
+        for(int row = 0; row < comparisonWordSize; row++)
+        {
+        	for(int column = 0; column < sequenceTextSize; column++)
+        	{
+        		initializedArray[row][column] = -1;
+        	}
+        	
+        }     
+        
+        return initializedArray;
+    }
+
+
+    /**
+     * 
+     * @param savedOccurrences
+     * @param sequenceTextSize 
+     * @param comparisonWordSize 
+     * @param sequenceTextIndex 
+     * @param comparisonWordIndex 
+     * @return
+     */
+    private static int saveFoundOccurrences(int[][] savedOccurrences, String comparisonWord, String sequenceText, int comparisonWordIndex, int sequenceTextIndex) 
+    {
+    	if (comparisonWordIndex == -1)
+    	{
+    		return 1;        	
+    	}
+    	if (savedOccurrences[comparisonWordIndex][sequenceTextIndex] == -1)
+    	{
+    		savedOccurrences[comparisonWordIndex][sequenceTextIndex] = searchForOccurrences(savedOccurrences, comparisonWord, sequenceText, 
+    				comparisonWordIndex, sequenceTextIndex);
+    	}
+		return savedOccurrences[comparisonWordIndex][sequenceTextIndex];
+	}
+
+
+	/**
+     * @param sequenceText2 
+	 * @param comparisonWord2 
+	 * @param savedOccurrences 
+	 * @param comparisonSize
      * @param sequenceSize
      * @return
      */
-    private static int cMeat(int comparisonSize, int sequenceSize)
+    private static int searchForOccurrences(int[][] savedOccurrences, String comparisonWord, String sequenceText, int comparisonWordIndex, int sequenceTextIndex)
     {
-        if (comparisonSize == -1)
-        return 1;
-        if (comparisonSize > sequenceSize)
-        return 0;
-        if (comparisonSize == sequenceSize)
+        if (comparisonWordIndex == -1)
         {
-        if (sameish(comparisonSize))
-        return 1;
-        return 0;
+        	return 1;
         }
-        if (comparisonWord.charAt(comparisonSize) == sequenceText.charAt(sequenceSize))
+        if (comparisonWordIndex > sequenceTextIndex)
         {
-        return (getNumberOfOccurences(comparisonSize - 1, sequenceSize - 1))
-          + getNumberOfOccurences(comparisonSize, sequenceSize - 1);
+        	return 0;
         }
-        return (getNumberOfOccurences(comparisonSize, sequenceSize - 1));
+        if (comparisonWordIndex == sequenceTextIndex)
+        {
+        	if (sameish(comparisonWordIndex))
+        	{
+        		return 1;
+        	}
+        	return 0;
+        }
+        if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
+        {
+        return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordIndex - 1), (sequenceTextIndex - 1))
+          + saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
+        }
+        return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
     }
 
     private static boolean sameish(int end)
