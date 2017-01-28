@@ -52,10 +52,16 @@ public class Project1
         	}
         	
         }        
-        return cShell(comparisonSize, sequenceSize);
+        return getNumberOfOccurences(comparisonSize, sequenceSize);
     }
 
-    private static int cShell(int comparisonSize, int sequenceSize)
+    /**
+     * returns the number of occurences the comparisonWord is found within sequenceText
+     * @param comparisonSize
+     * @param sequenceSize
+     * @return
+     */
+    private static int getNumberOfOccurences(int comparisonSize, int sequenceSize)
     {
         if (comparisonSize == -1)
         return 1;
@@ -83,10 +89,10 @@ public class Project1
         }
         if (comparisonWord.charAt(comparisonSize) == sequenceText.charAt(sequenceSize))
         {
-        return (cShell(comparisonSize - 1, sequenceSize - 1))
-          + cShell(comparisonSize, sequenceSize - 1);
+        return (getNumberOfOccurences(comparisonSize - 1, sequenceSize - 1))
+          + getNumberOfOccurences(comparisonSize, sequenceSize - 1);
         }
-        return (cShell(comparisonSize, sequenceSize - 1));
+        return (getNumberOfOccurences(comparisonSize, sequenceSize - 1));
     }
 
     private static boolean sameish(int end)
