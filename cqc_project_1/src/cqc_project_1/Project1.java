@@ -18,7 +18,7 @@ public class Project1
     
     /**
      * @param args
-     * @throws IOException l
+     * @throws IOException
      */
     public static void main(String[] args) throws IOException
     {
