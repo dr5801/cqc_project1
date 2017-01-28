@@ -13,12 +13,12 @@ public class Project1
 {
 
 	/* renamed z to sequence and x to comparison */
-    static String comparison, sequence;
+    static String comparison, sequenceText;
     static int rem[][];
     
     /**
      * @param args
-     * @throws IOException
+     * @throws IOException l
      */
     public static void main(String[] args) throws IOException
     {
@@ -28,9 +28,9 @@ public class Project1
         
         for (int i = 0; i < parsedUserInput; i++)
         {
-        	sequence = new String(bufferedReader.readLine());
+        	sequenceText = new String(bufferedReader.readLine());
         	comparison = new String(bufferedReader.readLine());
-        	System.out.println(answer(comparison, sequence));
+        	System.out.println(answer(comparison, sequenceText));
         }
     }
 
@@ -81,7 +81,7 @@ public class Project1
         return 1;
         return 0;
         }
-        if (comparison.charAt(comparisonSize) == sequence.charAt(sequenceSize))
+        if (comparison.charAt(comparisonSize) == sequenceText.charAt(sequenceSize))
         {
         return (cShell(comparisonSize - 1, sequenceSize - 1))
           + cShell(comparisonSize, sequenceSize - 1);
@@ -92,7 +92,7 @@ public class Project1
     private static boolean sameish(int end)
     {
         for (int i = 0; i <= end; i++)
-        if (comparison.charAt(i) != sequence.charAt(i))
+        if (comparison.charAt(i) != sequenceText.charAt(i))
         return false;
         return true;
     }
