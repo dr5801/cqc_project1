@@ -13,7 +13,7 @@ public class Project1
 {
 
 	/* renamed z to sequence and x to comparison */
-    static String comparison, sequenceText;
+    static String comparisonWord, sequenceText;
     static int rem[][];
     
     /**
@@ -29,8 +29,8 @@ public class Project1
         for (int i = 0; i < parsedUserInput; i++)
         {
         	sequenceText = new String(bufferedReader.readLine());
-        	comparison = new String(bufferedReader.readLine());
-        	System.out.println(answer(comparison, sequenceText));
+        	comparisonWord = new String(bufferedReader.readLine());
+        	System.out.println(answer(comparisonWord, sequenceText));
         }
     }
 
@@ -81,7 +81,7 @@ public class Project1
         return 1;
         return 0;
         }
-        if (comparison.charAt(comparisonSize) == sequenceText.charAt(sequenceSize))
+        if (comparisonWord.charAt(comparisonSize) == sequenceText.charAt(sequenceSize))
         {
         return (cShell(comparisonSize - 1, sequenceSize - 1))
           + cShell(comparisonSize, sequenceSize - 1);
@@ -92,7 +92,7 @@ public class Project1
     private static boolean sameish(int end)
     {
         for (int i = 0; i <= end; i++)
-        if (comparison.charAt(i) != sequenceText.charAt(i))
+        if (comparisonWord.charAt(i) != sequenceText.charAt(i))
         return false;
         return true;
     }
