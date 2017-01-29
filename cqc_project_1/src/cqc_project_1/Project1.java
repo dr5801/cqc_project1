@@ -122,7 +122,12 @@ public class Project1
 
         if (comparisonWordIndex == sequenceTextIndex)
         {
-        	return checkIfCharactersMatch(comparisonWord, sequenceText, comparisonWordIndex);
+        	return (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(comparisonWordIndex)) ? 1:0;
+//        	if(comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(comparisonWordIndex))
+//        	{
+//        		return 1;
+//        	}
+//        	return 0;
         }
         
         if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
@@ -132,22 +137,5 @@ public class Project1
         }
         
         return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
-    }
-
-    /**
-     * Checks if the character in comparisonWord is the same as the character in sequenceText at matching indexes
-     * 
-     * @param comparisonWord
-     * @param sequenceText
-     * @param matchingIndex
-     * @return 1 if they match; 0 otherwise
-     */
-    private static int checkIfCharactersMatch(String comparisonWord, String sequenceText, int matchingIndex)
-    {
-    	if(comparisonWord.charAt(matchingIndex) == sequenceText.charAt(matchingIndex))
-    	{
-    		return 1;
-    	}
-    	return 0;
     }
 }
