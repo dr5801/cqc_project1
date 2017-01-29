@@ -6,17 +6,20 @@ import java.io.InputStreamReader;
 
 /**
  * @author merlin
+ * @studentEditors Drew Rife & Jordan Long
  * 
  * Problem 11.6.2 from Programming Challenges. Using memoization
+ * 
+ * Project1 uses Recursion and memoization to find the number of occurrences between a sequence of letters and a comparison word.
+ * Memoization is used to store calculated results from an input and returns those results when that input occurs again to avoid duplicate calculations.
  */
 public class Project1
 {
-
-	/* renamed z to sequence and x to comparison */
-    static String comparisonWord, sequenceText;
-    static int rem[][];
-    
     /**
+     * Gets input from the user for the following:
+     * 	- Gets number of sequences to compare
+     *  - The sequence to be compared against
+     *  - The word to compare
      * @param args
      * @throws IOException
      */
@@ -28,17 +31,16 @@ public class Project1
         
         for (int i = 0; i < parsedUserInput; i++)
         {
-        	sequenceText = new String(bufferedReader.readLine());
-        	comparisonWord = new String(bufferedReader.readLine());
+        	String sequenceText = new String(bufferedReader.readLine());
+        	String comparisonWord = new String(bufferedReader.readLine());
         	System.out.println(getNumberOfOccurrences(comparisonWord, sequenceText));
         }
     }
-
+    
     /**
-     * returns the number of occurences the comparisonWord is found within sequenceText
-     * @param comparisonSize
-     * @param sequenceSize
-     * @return
+     * @param comparisonWord
+     * @param sequenceText
+     * @return the number of occurrences the comparisonWord is found within the sequence
      */
     private static int getNumberOfOccurrences(String comparisonWord, String sequenceText)
     {
@@ -49,13 +51,12 @@ public class Project1
     	
     	return saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordSize-1), (sequenceTextSize-1));
     }
-
+    
     /**
-     * Returns an initialized array filled with -1s
-     * 
-     * Sets the amount of rows by the size of the comparisonWord and
-     * sets the amount of columns by the size of the seqenceText
-     * 
+     * Initializes a 2D integer array that:
+     *  - sets the row size by the size of the comparisonWord
+     *  - sets the column size by the size of the sequenceText
+     *  
      * @param comparisonWordSize
      * @param sequenceTextSize
      * @return initializedArray
@@ -81,10 +82,10 @@ public class Project1
     /**
      * 
      * @param savedOccurrences
-     * @param sequenceTextSize 
-     * @param comparisonWordSize 
-     * @param sequenceTextIndex 
-     * @param comparisonWordIndex 
+     * @param comparisonWord
+     * @param sequenceText
+     * @param comparisonWordIndex
+     * @param sequenceTextIndex
      * @return
      */
     private static int saveFoundOccurrences(int[][] savedOccurrences, String comparisonWord, String sequenceText, int comparisonWordIndex, int sequenceTextIndex) 
@@ -93,11 +94,13 @@ public class Project1
     	{
     		return 1;        	
     	}
+
     	if (savedOccurrences[comparisonWordIndex][sequenceTextIndex] == -1)
     	{
     		savedOccurrences[comparisonWordIndex][sequenceTextIndex] = searchForOccurrences(savedOccurrences, comparisonWord, sequenceText, 
     				comparisonWordIndex, sequenceTextIndex);
     	}
+    	
 		return savedOccurrences[comparisonWordIndex][sequenceTextIndex];
 	}
 
@@ -116,11 +119,13 @@ public class Project1
         {
         	return 0;
         }
-        else if (comparisonWordIndex == sequenceTextIndex)
+
+        if (comparisonWordIndex == sequenceTextIndex)
         {
         	return checkIfCharactersMatch(comparisonWord, sequenceText, comparisonWordIndex);
         }
-        else if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
+        
+        if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
         {
         	return (saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, (comparisonWordIndex - 1), (sequenceTextIndex - 1))
         			+ saveFoundOccurrences(savedOccurrences, comparisonWord, sequenceText, comparisonWordIndex, (sequenceTextIndex - 1)));
@@ -131,6 +136,7 @@ public class Project1
 
     /**
      * Checks if the character in comparisonWord is the same as the character in sequenceText at matching indexes
+     * 
      * @param comparisonWord
      * @param sequenceText
      * @param matchingIndex
@@ -144,5 +150,4 @@ public class Project1
     	}
     	return 0;
     }
-
 }
