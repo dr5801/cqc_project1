@@ -122,12 +122,11 @@ public class Project1
 
         if (comparisonWordIndex == sequenceTextIndex)
         {
-        	return (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(comparisonWordIndex)) ? 1:0;
-//        	if(comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(comparisonWordIndex))
-//        	{
-//        		return 1;
-//        	}
-//        	return 0;
+        	if(comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(comparisonWordIndex))
+        	{
+        		return 1;
+        	}
+        	return 0;
         }
         
         if (comparisonWord.charAt(comparisonWordIndex) == sequenceText.charAt(sequenceTextIndex))
